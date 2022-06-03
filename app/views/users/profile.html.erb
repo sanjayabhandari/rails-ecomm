@@ -1,0 +1,103 @@
+          <div class="row grid-margin">
+            <div class="col-12">
+
+<!-- Table Section Start -->
+<div class="form-section">
+<div class="container">
+
+<% if notice %>
+<div class="alert alert-success" role="alert">
+  <%= notice %>
+</div>
+<% end %>
+  <div class="row">
+    <div class="card">
+      <div class="heading">
+        <h1><i class="fas fa-admin"></i> <%=t('admin_setting')%></h1>
+
+      </div>
+      <div class="content">
+       <%= form_with url: '/updateprofile/'+@admin.id.to_s ,scope: "admin"  do |form| %>
+   
+
+        <% errors = @admin.errors %>
+        <%=errors.first%>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= form.label :user_name,  t('user_name')+"*",style: "display: block"%>
+        <%= form.text_field :user_name ,required:true,maxlength:'255',size:'',:value=>@admin.user_name%>
+          <% if(errors.present? && errors[:user_name].present?) %>
+          <span class="text-danger"><i class="fa fa-exclamation-triangle"></i> <%= errors[:user_name][0] %></span>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= form.label :login_id, t('login_id')+"*", style: "display: block" %>
+        <%= form.text_field :login_id,disabled:true,:value=>@admin.login_id, style: "background: #ced4da;" %>
+      </div>
+     <% if(errors.present? && errors[:login_id].present?) %>
+        <span class="text-danger"><i class="fa fa-exclamation-triangle"></i> <%= errors[:login_id][0] %></span>
+      <% end %>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= form.label :email, t('email'), style: "display: block" %>
+        <%= form.email_field :email,required:false,maxlength:'255',size:'',:value=>@admin.email%>
+                <% if(errors.present? && errors[:email].present?) %>
+          <span class="text-danger"><i class="fa fa-exclamation-triangle"></i> <%= errors[:email][0] %></span>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-6"></div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= form.label :password, t('password')+' *', style: "display: block" %>
+        <%= form.password_field :password %>
+         <% if(errors.present? && errors[:password].present?) %>
+          <span class="text-danger"><i class="fa fa-exclamation-triangle"></i> <%= errors[:password][0] %></span>
+        <% end %>
+      </div>
+    </div>
+       <div class="col-md-6">
+      <div class="form-group">
+        <%= form.label :password_confirmation, t('password_confirmation')+'*', style: "display: block" %>
+        <%= form.password_field :password_confirmation %>
+         <% if(errors.present? && errors[:password_confirmation].present?) %>
+          <span class="text-danger"><i class="fa fa-exclamation-triangle"></i> <%= errors[:password_confirmation][0] %></span>
+        <% end %>
+      </div>
+    </div>
+      
+  </div>
+
+
+  <div class="row form-footer">
+    <div class="col-md-6">
+      <div class="form-group" style="display: flex; align-items: center;">
+
+      </div>
+    </div>
+    <div class="col-md-6 text-right">
+      <div class="form-btn">
+        <%= link_to ('<i class="far fa-window-close"></i> '+t('cancel')).html_safe, root_path, class:"btn btn-danger" %>
+        <%= form.button :submit ,:class=>'btn btn-success' do%>
+        <%=@admin.id ? ('<i class="far fa-share-square"></i> '+t('update')).html_safe : ('<i class="far fa-share-square"></i> '+t('create')).html_safe %>
+        <%end%>
+      </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Table Section End -->
+
+            </div>
+            </div>
